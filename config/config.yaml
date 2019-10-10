@@ -1,0 +1,4 @@
+rosbag_file: "/home/gstavrinos/2019-10-09-13-52-34.bag"
+# If a topic of interest is not specified, all pointcloud2 segments messages are going to be processed.
+topic_of_interest: "/pointcloud2_cluster_tracking/clusters"
+out_topic: "pointcloud2_segments_annotation_tool/pointcloud2"

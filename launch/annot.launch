@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+    <node pkg="pointcloud2_segments_tools" type="annot" respawn="false" name="pointcloud2_segments_annotation_tool" output="screen">
+        <rosparam file="$(find pointcloud2_segments_tools)/config/config.yaml" command="load" />
+    </node>
+</launch>
