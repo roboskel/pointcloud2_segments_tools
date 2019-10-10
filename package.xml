@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>pointcloud2_segments_tools</name>
+  <version>0.0.1</version>
+  <description>The pointcloud2_segments_tools package</description>
+
+  <maintainer email="gstavrinos@iit.demokritos.gr">George Stavrinos</maintainer>
+
+  <license>BSD</license>
+
+  <author email="gstavrinos@iit.demokritos.gr">George Stavrinos</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>pointcloud_msgs</depend>
+  <depend>pcl_ros</depend>
+  <depend>roscpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>tf</depend>
+
+</package>
