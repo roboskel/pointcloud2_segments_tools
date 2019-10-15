@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" respawn="false" name="laserscan_filter" output="screen">
+        <rosparam file="$(find pointcloud2_segments_tools)/config/laserscan_filter_humans_only.yaml" command="load"/>
+    </node>
+</launch>

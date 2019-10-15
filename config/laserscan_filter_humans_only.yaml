@@ -1,0 +1,13 @@
+scan_filter_chain:
+- name: box
+  type: laser_filters/LaserScanBoxFilter
+  params:
+        box_frame: hokuyo_base_laser_link
+        min_x: -1.0
+        max_x: 7.0
+        min_y: -1.5
+        max_y: 1.5
+        min_z: -1.0
+        max_z: 1.0
+        invert: true
+
