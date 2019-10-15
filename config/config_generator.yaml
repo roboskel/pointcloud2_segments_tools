@@ -1,0 +1,5 @@
+#class0_folder_location: "/home/gstavrinos/Downloads/walking_rosbags/walls_only/pointcloud2_segments_one_cluster/"
+class0_folder_location: "/home/gstavrinos/Downloads/walking_rosbags/walls_only/pointcloud2_segments/"
+class1_folder_location: "/home/gstavrinos/Downloads/walking_rosbags/humans_only/pointcloud2_segments/"
+topic_of_interest_for_class0: ""
+topic_of_interest_for_class1: ""

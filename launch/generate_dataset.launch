@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+    <node pkg="pointcloud2_segments_tools" type="dataset_generator" respawn="false" name="pointcloud2_segments_dataset_generator" output="screen">
+        <rosparam file="$(find pointcloud2_segments_tools)/config/config_generator.yaml" command="load" />
+    </node>
+</launch>
