@@ -6,6 +6,7 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
   pointcloud_msgs
   pcl_conversions
+  laser_filters
   sensor_msgs
   std_msgs
   pcl_ros
@@ -21,3 +22,7 @@ include_directories(
 
 add_executable(annot src/annotation_tool.cpp)
 target_link_libraries(annot ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+
+add_executable(dataset_generator src/dataset_generator.cpp)
+target_link_libraries(dataset_generator ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+
