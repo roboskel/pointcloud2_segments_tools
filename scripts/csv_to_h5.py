@@ -3,6 +3,42 @@ import os
 import re
 import sys
 import h5py
+import math
+import numpy as np
+
+poi = np.array([])
+
+def dist(point1):
+    global poi
+    return np.linalg.norm(point1-poi)
+
+# One way to reach a specified number of points, is to remove points from "bigger" pointclouds
+# The idea is to remove the points that are farthest away from the center of the pointcloud
+# The problem here:
+# Is the shape of the pointcloud maintained, or we mutated it?
+# Possible solution:
+# Apply a light sampling shaped-maintaing method and then remove the farthest points (but is this easy?)
+def clearPointcloudOuterPoints(pointcloud, target_no_points):
+    global poi
+    if len(pointcloud) - target_no_points <= 0:
+        return pointcloud
+    else:
+        pointcloud = np.array(pointcloud)
+        cx = np.mean([point[0] for point in pointcloud])
+        cy = np.mean([point[1] for point in pointcloud])
+        cz = np.mean([point[2] for point in pointcloud])
+        poi = np.array([cx,cy,cz])
+        dists = np.array(map(dist, pointcloud))
+        sorted_dists_ind = np.argpartition(dists, target_no_points-1)
+        return pointcloud[sorted_dists_ind][:target_no_points]
+
+# Another way to reach a specified number of points is to add points to "smaller" pointclouds
+# The idea is to add points at the exact same position as others in the pointcloud
+# The problem here:
+#  Do these extra points add bias?
+def addPointsToPointcloud(pointcloud, target_no_points):
+    # TODO
+    pass
 
 def main():
     if len(sys.argv) < 2:
@@ -40,7 +76,7 @@ def main():
                 # Skip every other element, because we get "," characters between each tuple
                 if i % 2 != 0:
                     d = d.split(",")
-                    tmp.append([float(d[0]), float(d[1]), float(d[2])])
+                    tmp.append(np.array([float(d[0]), float(d[1]), float(d[2])]))
                 i += 1
             data.append(tmp)
             labels.append(int(lbl))
