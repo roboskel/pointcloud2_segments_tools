@@ -12,6 +12,7 @@
 *.pch
 
 # Compiled Dynamic libraries
+*.pyc
 *.so
 *.dylib
 *.dll
@@ -33,3 +34,6 @@
 
 # No annotated files
 *.csv
+*.h5
+*.hdf5
+
