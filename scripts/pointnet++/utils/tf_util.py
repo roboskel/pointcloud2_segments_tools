@@ -1,5 +1,4 @@
 """ Wrapper functions for TensorFlow layers.
-
 Author: Charles R. Qi
 Date: November 2017
 """
@@ -23,10 +22,8 @@ def _variable_on_cpu(name, shape, initializer, use_fp16=False):
 
 def _variable_with_weight_decay(name, shape, stddev, wd, use_xavier=True):
   """Helper to create an initialized Variable with weight decay.
-
   Note that the Variable is initialized with a truncated normal distribution.
   A weight decay is added only if one is specified.
-
   Args:
     name: name of the variable
     shape: list of ints
@@ -34,7 +31,6 @@ def _variable_with_weight_decay(name, shape, stddev, wd, use_xavier=True):
     wd: add L2Loss weight decay multiplied by this float. If None, weight
         decay is not added for this Variable.
     use_xavier: bool, whether to use xavier initializer
-
   Returns:
     Variable Tensor
   """
@@ -64,7 +60,6 @@ def conv1d(inputs,
            bn_decay=None,
            is_training=None):
   """ 1D convolution with non-linear operation.
-
   Args:
     inputs: 3-D tensor variable BxLxC
     num_output_channels: int
@@ -80,7 +75,6 @@ def conv1d(inputs,
     bn: bool, whether to use batch norm
     bn_decay: float or float tensor variable in [0,1]
     is_training: bool Tensor variable
-
   Returns:
     Variable tensor
   """
@@ -132,7 +126,6 @@ def conv2d(inputs,
            bn_decay=None,
            is_training=None):
   """ 2D convolution with non-linear operation.
-
   Args:
     inputs: 4-D tensor variable BxHxWxC
     num_output_channels: int
@@ -148,7 +141,6 @@ def conv2d(inputs,
     bn: bool, whether to use batch norm
     bn_decay: float or float tensor variable in [0,1]
     is_training: bool Tensor variable
-
   Returns:
     Variable tensor
   """
@@ -199,7 +191,6 @@ def conv2d_transpose(inputs,
                      bn_decay=None,
                      is_training=None):
   """ 2D convolution transpose with non-linear operation.
-
   Args:
     inputs: 4-D tensor variable BxHxWxC
     num_output_channels: int
@@ -214,10 +205,8 @@ def conv2d_transpose(inputs,
     bn: bool, whether to use batch norm
     bn_decay: float or float tensor variable in [0,1]
     is_training: bool Tensor variable
-
   Returns:
     Variable tensor
-
   Note: conv2d(conv2d_transpose(a, num_out, ksize, stride), a.shape[-1], ksize, stride) == a
   """
   with tf.variable_scope(scope) as sc:
@@ -279,7 +268,6 @@ def conv3d(inputs,
            bn_decay=None,
            is_training=None):
   """ 3D convolution with non-linear operation.
-
   Args:
     inputs: 5-D tensor variable BxDxHxWxC
     num_output_channels: int
@@ -294,7 +282,6 @@ def conv3d(inputs,
     bn: bool, whether to use batch norm
     bn_decay: float or float tensor variable in [0,1]
     is_training: bool Tensor variable
-
   Returns:
     Variable tensor
   """
@@ -369,7 +356,6 @@ def max_pool2d(inputs,
                stride=[2, 2],
                padding='VALID'):
   """ 2D max pooling.
-
   Args:
     inputs: 4-D tensor BxHxWxC
     kernel_size: a list of 2 ints
@@ -394,7 +380,6 @@ def avg_pool2d(inputs,
                stride=[2, 2],
                padding='VALID'):
   """ 2D avg pooling.
-
   Args:
     inputs: 4-D tensor BxHxWxC
     kernel_size: a list of 2 ints
@@ -420,7 +405,6 @@ def max_pool3d(inputs,
                stride=[2, 2, 2],
                padding='VALID'):
   """ 3D max pooling.
-
   Args:
     inputs: 5-D tensor BxDxHxWxC
     kernel_size: a list of 3 ints
@@ -445,7 +429,6 @@ def avg_pool3d(inputs,
                stride=[2, 2, 2],
                padding='VALID'):
   """ 3D avg pooling.
-
   Args:
     inputs: 5-D tensor BxDxHxWxC
     kernel_size: a list of 3 ints
@@ -597,14 +580,12 @@ def dropout(inputs,
             keep_prob=0.5,
             noise_shape=None):
   """ Dropout layer.
-
   Args:
     inputs: tensor
     is_training: boolean tf.Variable
     scope: string
     keep_prob: float in [0,1]
     noise_shape: list of ints
-
   Returns:
     tensor variable
   """
@@ -613,3 +594,4 @@ def dropout(inputs,
                       lambda: tf.nn.dropout(inputs, keep_prob, noise_shape),
                       lambda: inputs)
     return outputs
+

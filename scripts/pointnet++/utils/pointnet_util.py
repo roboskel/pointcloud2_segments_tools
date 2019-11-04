@@ -1,18 +1,19 @@
 """ PointNet++ Layers
-
 Author: Charles R. Qi
 Date: November 2017
 """
 
 import os
 import sys
-
-ROOT_DIR = os.path.abspath(os.path.pardir)
-sys.path.append(ROOT_DIR)
-
-from tf_ops.sampling.tf_sampling import farthest_point_sample, gather_point
-from tf_ops.grouping.tf_grouping import query_ball_point, group_point, knn_point
-from tf_ops.interpolation.tf_interpolate import three_nn, three_interpolate
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(BASE_DIR)
+sys.path.append(os.path.join(ROOT_DIR, 'utils'))
+sys.path.append(os.path.join(ROOT_DIR, 'tf_ops/sampling'))
+sys.path.append(os.path.join(ROOT_DIR, 'tf_ops/grouping'))
+sys.path.append(os.path.join(ROOT_DIR, 'tf_ops/3d_interpolation'))
+from tf_sampling import farthest_point_sample, gather_point
+from tf_grouping import query_ball_point, group_point, knn_point
+from tf_interpolate import three_nn, three_interpolate
 import tensorflow as tf
 import numpy as np
 import tf_util
@@ -225,3 +226,4 @@ def pointnet_fp_module(xyz1, xyz2, points1, points2, mlp, is_training, bn_decay,
                                          scope='conv_%d'%(i), bn_decay=bn_decay)
         new_points1 = tf.squeeze(new_points1, [2]) # B,ndataset1,mlp[-1]
         return new_points1
+
