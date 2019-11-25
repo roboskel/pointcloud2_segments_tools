@@ -102,12 +102,12 @@ function pc2_seg_clustered() {
 }
 
 # Laserscan only for humans
-#ls_only $humans_only
+ls_only $humans_only
 # Laserscan only for walls
-#ls_only $walls_only
+ls_only $walls_only
 # Pointcloud2_Segments for humans
-#pc2_seg $humans_only
+pc2_seg $humans_only
 # Pointcloud2_Segments for walls (one cluster)
-#pc2_seg $walls_only
+pc2_seg $walls_only
 # Pointcloud2_Segments for walls (multiple clusters)
 pc2_seg_clustered
