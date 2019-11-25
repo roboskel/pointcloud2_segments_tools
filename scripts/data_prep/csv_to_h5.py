@@ -3,9 +3,9 @@ import os
 import re
 import sys
 import h5py
-import math
 import random
 import numpy as np
+from tqdm import tqdm
 
 poi = np.array([])
 
@@ -48,7 +48,7 @@ def main():
         return
 
     # Note to self, currently using this csv:
-    # /home/gstavrinos/catkin_ws/src/new_hpr/pointcloud2_segments_tools/dataset0.csv
+    # /home/gstavrinos/catkin_ws/src/new_hpr/pointcloud2_segments_tools/dataset2.csv
     input_file = sys.argv[1]
     path, f = sys.argv[1].rsplit(os.sep, 1)
     output_file = path + os.sep + f.rsplit(".", 1)[0] + ".h5"
@@ -62,15 +62,7 @@ def main():
 
     print("Processing csv file...")
     with open(input_file, "rb") as if_:
-        # TODO:
-        # hdf5 requires matrices with the same number of elements for all of its rows
-        # this basically means that I need to create a simple sampling procedure for each pointcloud
-        # in order to for all of them to have a target number of points
-        # Note: The csv that I am currently using has the following stats:
-        # PCs with less than 1024 points:                       20748
-        # PCs with less than 2048 and more than 1024 points:    24805
-        # PCs with more than 2048 points:                       8366
-        for line in if_.readlines():
+        for line in tqdm(if_.readlines()):
             dt, lbl = line.rsplit(",", 1)
             i = 0
             tmp = []
@@ -80,17 +72,19 @@ def main():
                     d = d.split(",")
                     tmp.append(np.array([float(d[0]), float(d[1]), float(d[2])]))
                 i += 1
-            tmp = addPointsToPointcloud(tmp, 1024)
-            tmp = clearPointcloudOuterPoints(tmp, 1024)
-            data.append(tmp)
-            labels.append(int(lbl))
+            if len(tmp) > 20:
+                tmp = addPointsToPointcloud(tmp, 1024)
+                tmp = clearPointcloudOuterPoints(tmp, 1024)
+                data.append(tmp)
+                labels.append(int(lbl))
 
     print("---")
     print("Generating h5 file...")
-    h5out = h5py.File(output_file, "w")
-    h5out.create_dataset("data", data=data, compression="gzip", compression_opts=4, dtype="float32")
-    h5out.create_dataset("label", data=labels, compression="gzip", compression_opts=4, dtype="int")
-    h5out.close()
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    with h5py.File(output_file, "a") as h5out:
+        h5out.create_dataset("data", data=data, compression="gzip", compression_opts=4, dtype="float32")
+        h5out.create_dataset("label", data=labels, compression="gzip", compression_opts=4, dtype="int")
     print("All done! bb")
 
 
