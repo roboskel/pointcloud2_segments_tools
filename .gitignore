@@ -37,5 +37,5 @@
 *.h5
 *.hdf5
 *.txt
-scripts/logs/log/test/*
-scripts/logs/log/train/*
+scripts/pointnet++/logs/log/test/*
+scripts/pointnet++/logs/log/train/*
