@@ -1,4 +1,3 @@
-
 #/bin/bash
 # CUDA 8.0
 #/usr/local/cuda-8.0/bin/nvcc tf_sampling_g.cu -o tf_sampling_g.cu.o -c -O2 -DGOOGLE_CUDA=1 -x cu -Xcompiler -fPIC
