@@ -37,3 +37,5 @@
 *.h5
 *.hdf5
 *.txt
+scripts/logs/log/test/*
+scripts/logs/log/train/*
